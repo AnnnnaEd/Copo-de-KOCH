@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Generador de Copos de Nieve</title>
+  <style>
+    :root{
+      --m1:#2e0249;
+      --m2:#570a57;
+      --m3:#9d4edd;
+      --m4:#c77dff;
+      --text:#f3e8ff;
+    }
+    *{box-sizing:border-box}
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(1200px 500px at 50% -10%, #6a00f4 0%, transparent 60%),
+                  linear-gradient(135deg, var(--m1), var(--m2), var(--m3));
+      background-size: 140% 140%;
+      animation: bg 16s ease-in-out infinite alternate;
+      color: var(--text);
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    @keyframes bg {
+      to { background-position: 80% 20%, 100% 0%; }
+    }
+    .card{
+      width: min(100%, 980px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      padding: 28px 24px 30px;
+    }
+    h1{
+      margin: 0 0 8px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      text-shadow: 0 6px 28px rgba(0,0,0,.35);
+    }
+    p{margin:0 0 18px; opacity:.9}
+
+    .controls{
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:14px 0 18px;
+    }
+    button{
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(135deg, var(--m3), var(--m4));
+      color:#fff; font-weight:600; cursor:pointer;
+      transition: transform .15s ease, box-shadow .2s ease, background .3s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+    }
+    button:hover{ transform: translateY(-2px) scale(1.03); box-shadow:0 16px 34px rgba(0,0,0,.35); }
+    button:active{ transform: translateY(0) scale(.99); }
+
+    .frame{
+      margin-top: 10px;
+      border: 4px solid var(--m4);
+      border-radius: 18px;
+      padding: 10px;
+      background: #000;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.1), 0 8px 26px rgba(0,0,0,.35);
+    }
+    img{
+      display:block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+    footer{ margin-top:14px; opacity:.75; font-size:.92rem; text-align:center; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>❄ Generador de Copos de Nieve de Koch</h1>
+    <p>Elige un estilo para generar tu copo.</p>
+
+    <div class="controls">
+      <button onclick="generateSnowflake('full')">✨ Completo</button>
+      <button onclick="generateSnowflake('half_snowflake')">🌓 Mitad del Copo</button>
+    </div>
+
+    <div class="frame">
+      <img id="snowflake-image" src="" alt="Aquí aparecerá el copo de nieve">
+    </div>
+
+    <footer>Proyecto Fractal Koch ❄️</footer>
+  </main>
+
+  <script>
+    function generateSnowflake(type) {
+      const imageElement = document.getElementById('snowflake-image');
+      imageElement.src = `/snowflake?type=${type}&_t=${Date.now()}`;
+    }
+  </script>
+</body>
+</html>
